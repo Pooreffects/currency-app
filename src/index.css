@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@100;400;500;600;700&display=swap');
+
+*,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #063773;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.app {
+  max-width: 90vw;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 779px) {
+  .form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    justify-items: center;
+    grid-gap: 2rem;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+  .input {
+    max-width: 280px;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
