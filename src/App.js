@@ -8,9 +8,7 @@ import useFetch from './hooks/useFetch';
 
 export default function App() {
   /* Fetched Data */
-  const [exchangeRate] = useFetch(
-    `https://openexchangerates.org/api/latest.json?app_id=${process.env.REACT_APP_API_KEY}`
-  );
+  const [exchangeRate] = useFetch('https://openexchangerates.org/api/');
 
   /* Amount Input Fields */
   const [amount, setAmount] = useState(1);

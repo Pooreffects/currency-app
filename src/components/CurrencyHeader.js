@@ -2,9 +2,7 @@ import React from 'react';
 import useFetch from '../hooks/useFetch';
 
 export default function CurrencyHeader({ toAmount, fromAmount }) {
-  const [fromOption, toOption] = useFetch(
-    'https://openexchangerates.org/api/currencies.json'
-  );
+  const [fromOption, toOption] = useFetch('https://openexchangerates.org/api/');
   return (
     <header className="p-6 border-b-2 mb-6   ">
       <div className="flex flex-col justify-evenly">

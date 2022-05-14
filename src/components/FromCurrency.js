@@ -7,7 +7,7 @@ export default function FromCurrency({
   handleFormSubmit,
 }) {
   const [fromOptions, fromOption, setFromOption] = useFetch(
-    'https://openexchangerates.org/api/currencies.json'
+    'https://openexchangerates.org/api/'
   );
   return (
     <div className="p-4">
@@ -29,11 +29,12 @@ export default function FromCurrency({
           value={fromOption}
           onChange={(e) => setFromOption(e.target.value)}
         >
-          {fromOptions?.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
+          {fromOptions &&
+            fromOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
         </select>
       </form>
     </div>

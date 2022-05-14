@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = ({ baseUrl, ratesUrl }) => {
+const useFetch = ({ baseUrl }) => {
   const [fromOptions, setFromOptions] = useState([]);
   const [fromOption, setFromOption] = useState();
   const [toOptions, setToOptions] = useState([]);
@@ -9,7 +9,7 @@ const useFetch = ({ baseUrl, ratesUrl }) => {
   const [exchangeRate, setExchangeRate] = useState([]);
 
   useEffect(() => {
-    fetch(baseUrl)
+    fetch(`${baseUrl}currencies.json`)
       .then((res) => res.json())
       .then((currencyNamesData) => {
         setFromOptions([
@@ -25,7 +25,7 @@ const useFetch = ({ baseUrl, ratesUrl }) => {
   }, [baseUrl, fromOptions, toOptions]);
 
   useEffect(() => {
-    fetch(ratesUrl)
+    fetch(`${baseUrl}latest.json?app_id=${process.env.REACT_APP_API_KEY}`)
       .then((res) => res.json())
       .then((ratesData) => {
         // to extract the rate only
@@ -37,7 +37,7 @@ const useFetch = ({ baseUrl, ratesUrl }) => {
         const rates = arr.map((pair) => pair.pop());
         setExchangeRate(rates);
       });
-  }, [ratesUrl]);
+  }, [baseUrl]);
 
   return [
     fromOption,

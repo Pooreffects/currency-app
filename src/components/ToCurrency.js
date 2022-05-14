@@ -7,7 +7,7 @@ export default function CurrencyRow({
   handleFormSubmit,
 }) {
   const [setToOption, toOptions, toOption] = useFetch(
-    `https://openexchangerates.org/api/currencies.json`
+    'https://openexchangerates.org/api/'
   );
   return (
     <div className="p-4 ">
@@ -29,11 +29,12 @@ export default function CurrencyRow({
           value={toOption}
           onChange={(e) => setToOption(e.target.value)}
         >
-          {toOptions?.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
+          {toOptions &&
+            toOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
         </select>
       </form>
     </div>
