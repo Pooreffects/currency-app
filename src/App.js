@@ -1,53 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CurrencyHeader from './components/CurrencyHeader';
 import FromCurrency from './components/FromCurrency';
 import ToCurrency from './components/ToCurrency';
 import logo from './logo.svg';
 import { motion } from 'framer-motion';
+import useFetch from './hooks/useFetch';
 
-function App() {
-  /* Select Options */
-  const [fromOptions, setFromOptions] = useState([]);
-  const [fromOption, setFromOption] = useState();
-  const [toOptions, setToOptions] = useState([]);
-  const [toOption, setToOption] = useState();
+export default function App() {
+  /* Fetched Data */
+  const [exchangeRate] = useFetch(
+    `https://openexchangerates.org/api/latest.json?app_id=${process.env.REACT_APP_API_KEY}`
+  );
 
   /* Amount Input Fields */
   const [amount, setAmount] = useState(1);
   const [amountFrom, setAmountFrom] = useState(true);
-
-  /* Exchange Rates */
-  const [exchangeRate, setExchangeRate] = useState([]);
-
-  /* Fetch Currencies names */
-  useEffect(() => {
-    fetch('https://openexchangerates.org/api/currencies.json')
-      .then((res) => res.json())
-      .then((data) => {
-        setFromOptions([
-          ...Object.keys(data).sort((a, b) => a[0].localeCompare(b[0])),
-        ]);
-        setFromOption(fromOptions[0]);
-        setToOptions([...Object.values(data)]);
-        setToOption(toOptions[0]);
-      });
-    fetch(
-      `https://openexchangerates.org/api/latest.json?app_id=${process.env.REACT_APP_API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // to extract the rate only
-        const arr = [
-          ...Object.entries(data.rates).sort((a, b) =>
-            a[0].localeCompare(b[0])
-          ),
-        ];
-        const rates = arr.map((pair) => pair.pop());
-        setExchangeRate(rates[0]);
-      });
-  }, []);
-
-  // console.log(exchangeRate);
 
   let fromAmount, toAmount;
   if (amountFrom) {
@@ -103,26 +70,15 @@ function App() {
         transition={{ transition: 'easeOut', duration: 1, delay: 1 }}
         className="lg:max-w-2xl p-4 border-2 mx-auto my-0 rounded-2xl  mt-10  h-max"
       >
-        <CurrencyHeader
-          selectedFromOption={fromOption}
-          selectedToOption={toOption}
-          toAmount={toAmount}
-          fromAmount={fromAmount}
-        />
+        <CurrencyHeader toAmount={toAmount} fromAmount={fromAmount} />
 
         <FromCurrency
-          fromOptions={fromOptions}
-          selectedFromOption={fromOption}
-          onChangeFromCurrency={(e) => setFromOption(e.target.value)}
           amount={fromAmount}
           onAmountChange={handleFromAmountChange}
           handleFormSubmit={handleFormSubmit}
         />
         <div className="text-center text-slate-100 font-bold text-4xl"> = </div>
         <ToCurrency
-          toOptions={toOptions}
-          selectedToOption={toOption}
-          onChangeToCurrency={(e) => setToOption(e.target.value)}
           amount={toAmount}
           onAmountChange={handleToAmountChange}
           handleFormSubmit={handleFormSubmit}
@@ -131,5 +87,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

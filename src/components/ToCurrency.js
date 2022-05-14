@@ -1,13 +1,14 @@
 import React from 'react';
+import useFetch from '../hooks/useFetch';
 
 export default function CurrencyRow({
-  toOptions,
-  selectedToOption,
-  onChangeToCurrency,
   amount,
   onAmountChange,
   handleFormSubmit,
 }) {
+  const [setToOption, toOptions, toOption] = useFetch(
+    `https://openexchangerates.org/api/currencies.json`
+  );
   return (
     <div className="p-4 ">
       <form
@@ -25,8 +26,8 @@ export default function CurrencyRow({
         />
         <select
           className="input w-72 shrink p-4 pr-12 text-sm bg-slate-100 border-gray-400 rounded-lg shadow-sm focus:outline-none"
-          value={selectedToOption}
-          onChange={onChangeToCurrency}
+          value={toOption}
+          onChange={(e) => setToOption(e.target.value)}
         >
           {toOptions?.map((option) => (
             <option key={option} value={option}>
