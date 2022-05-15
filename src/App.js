@@ -12,7 +12,7 @@ export default function App() {
         transition={{ transition: 'easeOut', duration: 1 }}
         className="app-header p-5 text-center"
       >
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} alt="logo" />
       </motion.div>
       <motion.h2
         initial={{ opacity: 0, y: -50 }}

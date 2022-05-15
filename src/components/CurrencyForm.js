@@ -47,13 +47,6 @@ export default function CurrencyForm() {
     setAmountFrom(false);
   }
 
-  /* Form Submission */
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    return false;
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: +50 }}
@@ -74,7 +67,6 @@ export default function CurrencyForm() {
         setFromOption={setFromOption}
         amount={fromAmount}
         onAmountChange={handleFromAmountChange}
-        handleFormSubmit={handleFormSubmit}
       />
       <div className="text-center text-slate-100 font-bold text-4xl"> = </div>
       <ToCurrency
@@ -82,7 +74,6 @@ export default function CurrencyForm() {
         setToOption={setToOption}
         amount={toAmount}
         onAmountChange={handleToAmountChange}
-        handleFormSubmit={handleFormSubmit}
       />
     </motion.div>
   );
