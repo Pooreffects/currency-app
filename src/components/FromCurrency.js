@@ -1,13 +1,14 @@
-import React from 'react';
-import useFetch from '../hooks/useFetch';
+import useFetchCurrencyNames from '../hooks/useFetchCurrencyNames';
 
 export default function FromCurrency({
   amount,
   onAmountChange,
   handleFormSubmit,
+  setFromOption,
+  fromOption,
 }) {
-  const [fromOptions, fromOption, setFromOption] = useFetch(
-    'https://openexchangerates.org/api/'
+  const [fromOptions] = useFetchCurrencyNames(
+    'https://openexchangerates.org/api/currencies.json'
   );
   return (
     <div className="p-4">
@@ -29,12 +30,11 @@ export default function FromCurrency({
           value={fromOption}
           onChange={(e) => setFromOption(e.target.value)}
         >
-          {fromOptions &&
-            fromOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
+          {fromOptions?.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
         </select>
       </form>
     </div>
