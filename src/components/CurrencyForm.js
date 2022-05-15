@@ -29,10 +29,10 @@ export default function CurrencyForm() {
   let fromAmount, toAmount;
   if (amountFrom) {
     fromAmount = amount;
-    toAmount = amount * exchangeRates;
+    toAmount = amount * exchangeRates[0];
   } else {
     toAmount = amount;
-    fromAmount = amount / exchangeRates;
+    fromAmount = amount / exchangeRates[0];
   }
 
   /* Handle the amount change on user input */
