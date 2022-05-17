@@ -12,7 +12,9 @@ const useFetchCurrencyNames = (baseUrl) => {
           ...Object.keys(data).sort((a, b) => a[0].localeCompare(b[0])),
         ]);
         // full form
-        setToOptions([...Object.values(data)]);
+        setToOptions([
+          ...Object.values(data).sort((a, b) => a[0].localeCompare(b[0])),
+        ]);
       });
   }, [baseUrl]);
 

@@ -1,14 +1,10 @@
-import useFetchCurrencyNames from '../hooks/useFetchCurrencyNames';
-
 export default function CurrencyRow({
+  toOptions,
   amount,
   onAmountChange,
-  toOption,
   setToOption,
+  toOption,
 }) {
-  const [toOptions] = useFetchCurrencyNames(
-    'https://openexchangerates.org/api/currencies.json'
-  );
   return (
     <div className="p-4 form lg:flex justify-between items-center md:flex ">
       <input

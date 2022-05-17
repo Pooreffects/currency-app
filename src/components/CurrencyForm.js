@@ -19,7 +19,7 @@ export default function CurrencyForm() {
 
   useEffect(() => {
     setFromOption(fromOptions[0]);
-    setToOption(toOptions[0]);
+    setToOption(toOptions[2]);
   }, [fromOptions, toOptions]);
 
   /* Amount Input Fields */
@@ -63,6 +63,7 @@ export default function CurrencyForm() {
       />
 
       <FromCurrency
+        fromOptions={fromOptions}
         fromOption={fromOption}
         setFromOption={setFromOption}
         amount={fromAmount}
@@ -70,6 +71,7 @@ export default function CurrencyForm() {
       />
       <div className="text-center text-slate-100 font-bold text-4xl"> = </div>
       <ToCurrency
+        toOptions={toOptions}
         toOption={toOption}
         setToOption={setToOption}
         amount={toAmount}
